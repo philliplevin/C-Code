@@ -27,3 +27,10 @@ How to run program
 After compiling, the program can be run with the command:
 
 ./a.out
+
+----------------------
+Example of program use
+----------------------
+In this example, I am using the program to predict how much money someone would earn in tips based on how many hours their shift is. 
+
+![alt tag](https://github.com/philliplevin/C-Code/blob/master/Prediction/program-running.png?raw=true)
