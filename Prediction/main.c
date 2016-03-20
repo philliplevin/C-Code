@@ -89,8 +89,8 @@ void solveNormalEquation(struct normalEquationVariables *v, double *xArr,
 	}
 
 	/* Each column of row 2 has the same value as the position in the same number
-  * row of column 2 of matrix A
-  */
+     * row of column 2 of matrix A
+     */
 	for(k = 0; k < size; ++k )
 	{
 		XT[1][k] = xArr[k];
@@ -327,8 +327,8 @@ int main(int argc, char **argv)
 		x = atof(temp);
 
 		/* Call solveNormalEquation to generate the values of b0 and b1 in the
-     * linear equation of the form y = b0 + b1x
-     */
+         * linear equation of the form y = b0 + b1x
+         */
 		solveNormalEquation(&v, xArr, yArr, (int) k);
 
 		/* Compute predicted value using linear equation */
