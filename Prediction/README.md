@@ -1,6 +1,6 @@
 Author: Phillip Levin
 
-Name of program: Prediction:
+Name of program: Prediction
 
 Languages: C
 
