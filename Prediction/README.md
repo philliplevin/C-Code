@@ -1,5 +1,7 @@
 Author: Phillip Levin
+
 Name of program: Prediction:
+
 Languages: C
 
 -----------
