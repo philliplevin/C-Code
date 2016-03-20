@@ -245,7 +245,7 @@ int main(int argc, char **argv)
 
 	if(*str == '?')
 	{
-		printf("%s", "Suppose you have two things that are related -- for example
+	printf("%s", "Suppose you have two things that are related -- for example
     \nheight (independent variable) and shoe size (dependent variable). You
     \nthen collect data for a number of people, including their height and
     \nshoe size. Using this data, it is possible to then develop an equation
@@ -255,7 +255,7 @@ int main(int argc, char **argv)
     \nthe point of this program: using it, you can provide data for two
     \nrelated things and this the program will predict the value of one
     based\non the value of the other. So, let's try this again... \n");
-		printf("%s", "What is the name of your independent variable? \n" );
+	printf("%s", "What is the name of your independent variable? \n" );
 
 		if(*fgets(xName, BUFSIZ, stdin) == '!'){
 			return 0;
