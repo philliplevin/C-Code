@@ -89,7 +89,8 @@ void solveNormalEquation(struct normalEquationVariables *v, double *xArr,
 	}
 
 	/* Each column of row 2 has the same value as the position in the same number
-   * row of column 2 of matrix A */
+  * row of column 2 of matrix A
+  */
 	for(k = 0; k < size; ++k )
 	{
 		XT[1][k] = xArr[k];
