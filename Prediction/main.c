@@ -13,6 +13,7 @@
 
 /* Constants */
 #define PREDICT "Provide a value for %s, and I'll predict a value for %s. Or if you are finished and want to end the program type !"
+#define PREDICTION "I predict that %s will be %f"
 
 /* normalEquationVariables structs are used to store information about the variables b0 and b1, which are the coefficients in the equation y = b0 + b1x */
 struct normalEquationVariables{
@@ -278,8 +279,7 @@ int main(int argc, char **argv)
 		y = v.b0 + (v.b1*x);
 
 		/* Print results */
-		printf("%s", "The value is ");
-		printf("%f", y);
+		printf(PREDICTION, yName, y);
 		printf("%c", '\n');
 
 		printf(PREDICT, xName, yName);
