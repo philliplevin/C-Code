@@ -24,8 +24,8 @@
  #include <string.h>
 
 /* Constants */
-#define PREDICT "Provide a value for %s, and I'll predict a value for %s. Or if
-you are finished and want to end the program type !"
+#define PREDICT "Provide a value for %s, and I'll predict a value for %s. Or"\
+" if you are finished and want to end the program type !"
 #define PREDICTION "I predict that %s will be %f"
 
 /* normalEquationVariables structs are used to store information about the
@@ -167,7 +167,7 @@ void solveNormalEquation(struct normalEquationVariables *v, double *xArr,
 
 	/* Form matrix dbca /*/
 	double dbca[2][2] = {
-							XTX[1][1], -1*XTX[0][1], -1*XTX[1][0], XTX[0][0]
+			      XTX[1][1], -1*XTX[0][1], -1*XTX[1][0], XTX[0][0]
 
 						};
 
@@ -235,8 +235,8 @@ int main(int argc, char **argv)
 	double yArr[BUFSIZ]; // Holds each y value supplied by user
 
 	/* Prompt user for data set for x values */
-	printf("%s", "What is the name of your independent variable? Type ? if you
-         need directions or ! at any time to end the program \n" );
+	printf("%s", "What is the name of your independent variable? Type ? if you need"\
+	" directions or ! at any time to end the program \n" );
 	str = fgets(xName, BUFSIZ, stdin);
 	if(*str == '!')
 	{
@@ -245,16 +245,16 @@ int main(int argc, char **argv)
 
 	if(*str == '?')
 	{
-	printf("%s", "Suppose you have two things that are related -- for example
-    \nheight (independent variable) and shoe size (dependent variable). You
-    \nthen collect data for a number of people, including their height and
-    \nshoe size. Using this data, it is possible to then develop an equation
-    \nthat will predict someone's shoe size based on their height. This
-    \nprediction may or may not be completely accurate, depending on the
-    true\nquantitative relationship between the two things, of course. Now to
-    \nthe point of this program: using it, you can provide data for two
-    \nrelated things and this the program will predict the value of one
-    based\non the value of the other. So, let's try this again... \n");
+	printf("%s", "Suppose you have two things that are related -- for example"\
+	"\nheight (independent variable) and shoe size (dependent variable). You"\
+    	"\nthen collect data for a number of people, including their height and"\
+    	"\nshoe size. Using this data, it is possible to then develop an equation"\
+    	"\nthat will predict someone's shoe size based on their height. This"\
+    	"\nprediction may or may not be completely accurate, depending on the"\
+    	"true\nquantitative relationship between the two things, of course. Now to"\
+    	"\nthe point of this program: using it, you can provide data for two"\
+    	"\nrelated things and this the program will predict the value of one"\
+    	"based\non the value of the other. So, let's try this again... \n");
 	printf("%s", "What is the name of your independent variable? \n" );
 
 		if(*fgets(xName, BUFSIZ, stdin) == '!'){
@@ -313,7 +313,7 @@ int main(int argc, char **argv)
 
 	if(v.xCount != v.yCount)
 	{
-		printf("%s", "The number of x values must match the number of y values");
+		printf("%s", "The number of x values must match the number of y values\n");
 		return 0;
 	}
 
