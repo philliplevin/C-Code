@@ -1,2 +1,2 @@
 # C-Code
-Some programs in C
+This repo contains some of the programs I have written in C. 
