@@ -1,8 +1,20 @@
 /* Author: Phillip Levin
  * Date last modified: 03/19/2016
  * Program name: Prediction
- * Description: This is a C program that can generate quantitative predictions based on a set of data. Users supply a set of x and y pairs, where x is a suspected independent variable and y is a suspected dependent variable. After naming the variables and providing a data set, users can provide a value and the program will predict the corresponding dependent value. The algorithm employed uses the supplied data set to determine a linear equation that describes the relationship between the two variables. The program uses the given pairs of values to generate a least squares equation by solving the normal equation for the vector containing the regression coefficients that define this model. Given this approach, Prediction is limited to making predictions that are linear by nature. As a result, this program will not produce optimal predictions for all data sets
- * Progress of development: Finished. Additional error checking and features me be added in the future
+ * Description: This is a C program that can generate quantitative predictions
+ * based on a set of data. Users supply a set of x and y pairs, where x is a
+ * suspected independent variable and y is a suspected dependent variable. After
+ * naming the variables and providing a data set, users can provide a value and
+ * the program will predict the corresponding dependent value. The algorithm
+ * employed uses the supplied data set to determine a linear equation that
+ * describes the relationship between the two variables. The program uses the
+ * given pairs of values to generate a least squares equation by solving the
+ * normal equation for the vector containing the regression coefficients that
+ * define this model. Given this approach, Prediction is limited to making
+ * predictions that are linear by nature. As a result, this program will not
+ * produce optimal predictions for all data sets
+ * Progress of development: Finished. Additional error checking and features me
+ * be added in the future
  */
 
  /* Headers */
@@ -12,10 +24,13 @@
  #include <string.h>
 
 /* Constants */
-#define PREDICT "Provide a value for %s, and I'll predict a value for %s. Or if you are finished and want to end the program type !"
+#define PREDICT "Provide a value for %s, and I'll predict a value for %s. Or if
+you are finished and want to end the program type !"
 #define PREDICTION "I predict that %s will be %f"
 
-/* normalEquationVariables structs are used to store information about the variables b0 and b1, which are the coefficients in the equation y = b0 + b1x */
+/* normalEquationVariables structs are used to store information about the
+ * variables b0 and b1, which are the coefficients in the equation y = b0 + b1x
+ */
 struct normalEquationVariables{
 
 	double b0;
@@ -27,10 +42,19 @@ struct normalEquationVariables{
 /***** Function definitions *****/
 
 /* Function name: solveNormalEquation()
- * Function prototype: void solveNormalEquation(struct normalEquationVariables *v, double *xArr, double *yArr, int size)
- * Description: This function solves the normal equation XT*X*B=XTy, where X is a matrix whose columns include the provided x values, XT is the inverse of X, B is a vector containing the regression coefficients, and y is is a vector comprising the y values. This function assumes that X is a 4x4 matrix and that y is a 4x1 vector. It uses various linear algebra methods to solve for the vector B and thus the regression coefficients. The normalEquationVariables struct v is then updated with these values
+ * Function prototype:
+ * void solveNormalEquation(struct normalEquationVariables
+ *                          *v, double *xArr, double *yArr, int size)
+ * Description: This function solves the normal equation XT*X*B=XTy, where X
+ * is a matrix whose columns include the provided x values, XT is the inverse
+ * of X, B is a vector containing the regression coefficients, and y is is a
+ * vector comprising the y values. This function assumes that X is a 4x4 matrix
+ * and that y is a 4x1 vector. It uses various linear algebra methods to solve
+ * for the vector B and thus the regression coefficients. The
+ * normalEquationVariables struct v is then updated with these values
  * Parameters:
- *				- v -- Struct whose members store the values of the regression coefficients b0 and b1
+ *				- v -- Struct whose members store the values of the regression
+ *               coefficients b0 and b1
  *				- xArr -- Array containing supplied x values
  *				- yArr -- Array containing supplied y values
  *				- size  -- The number of elements in xArr and yArr
@@ -39,7 +63,8 @@ struct normalEquationVariables{
  * Return value: None
  */
 
-void solveNormalEquation(struct normalEquationVariables *v, double *xArr, double *yArr, int size)
+void solveNormalEquation(struct normalEquationVariables *v, double *xArr,
+                         double *yArr, int size)
 {
 
 	/* Make matrix X */
@@ -63,7 +88,8 @@ void solveNormalEquation(struct normalEquationVariables *v, double *xArr, double
 		XT[0][k] = 1;
 	}
 
-	/* Each column of row 2 has the same value as the position in the same number row of column 2 of matrix A */
+	/* Each column of row 2 has the same value as the position in the same number
+   * row of column 2 of matrix A */
 	for(k = 0; k < size; ++k )
 	{
 		XT[1][k] = xArr[k];
@@ -79,7 +105,8 @@ void solveNormalEquation(struct normalEquationVariables *v, double *xArr, double
 	XTX[0][0] = size; // First row is always equal to the size of elements
 
 	/* Compute column 1, row 2 of X^TX */
-	double sum = 0; // Holds temporary sum of values during process matrix multiplication
+	double sum = 0; // Holds temporary sum of values during process matrix
+                  // multiplication
 
 	for(k = 0; k < size; ++k)
 	{
@@ -97,7 +124,8 @@ void solveNormalEquation(struct normalEquationVariables *v, double *xArr, double
 
 	for(k = 0; k < size; ++k)
 	{
-		sum = sum + X[k][1]*X[k][1]; // Sum the squares of each row of column 2 of matrix X
+		sum = sum + X[k][1]*X[k][1]; // Sum the squares of each row of column 2
+                                // of matrix X
 	}
 
 	XTX[1][1] = sum;
@@ -169,11 +197,26 @@ void solveNormalEquation(struct normalEquationVariables *v, double *xArr, double
 
 /* Function name: main()
  * Function prototype: int main(int argc, char **argv)
- * Description: Main driver for program. Begins by prompting the user for the name of the independent variable in question as well as a collection of data points for that variable. Next, it prompts the user for the name of the dependent variable and a set of data points that relate to each of the previous x values provided. In the event that these data sets are not the same size, it returns an error message to the user via stdout. If the sets are of the same size, then it prompts user for an x value for which it will predict a corresponding y value. It then calls solveNormalEquation() to generate the coefficients of the linear equation describing the data. The y variable in this equation is then solved for and printed to stdout. Users are then prompted to enter another x value or end the program. Minimal error checking occurs during execution of main() as well as the functions it calls. Users are expected to follow the given directions, otherwise unexpected program behavior may occur
+ * Description: Main driver for program. Begins by prompting the user for the
+ * name of the independent variable in question as well as a collection of data
+ * points for that variable. Next, it prompts the user for the name of the
+ * dependent variable and a set of data points that relate to each of the
+ * previous x values provided. In the event that these data sets are not the
+ * same size, it returns an error message to the user via stdout. If the sets
+ * are of the same size, then it prompts user for an x value for which it will
+ * predict a corresponding y value. It then calls solveNormalEquation() to
+ * generate the coefficients of the linear equation describing the data. The y
+ * variable in this equation is then solved for and printed to stdout. Users
+ * are then prompted to enter another x value or end the program. Minimal error
+ * checking occurs during execution of main() as well as the functions it calls.
+ * Users are expected to follow the given directions, otherwise unexpected
+ * program behavior may occur
  * Parameters:
  *            - Not used
- * Cause of error: If the size of the data sets for x and y variables are different
- * Return value: 0 if program fails or ends early. 1 if program is run until completion
+ * Cause of error: If the size of the data sets for x and y variables are
+ *                 different
+ * Return value: 0 if program fails or ends early. 1 if program is run until
+ *               completion
  */
 
 int main(int argc, char **argv)
@@ -183,14 +226,16 @@ int main(int argc, char **argv)
 	char xName[BUFSIZ]; // Name of x variable provided by user
 	char yName[BUFSIZ]; // Name of y variable provided by user
 	char *str = NULL; // Used as buffer for strings
-	struct normalEquationVariables v; // Stores coefficients for variables b0 and b1 in linear equation y = b0 + b1x
+	struct normalEquationVariables v; // Stores coefficients for variables b0
+                                    // and b1 in linear equation y = b0 + b1x
 	char temp[BUFSIZ]; // Line of text supplied by user is temporarily stored here
 	double tempValue = 0; // Holds temporary double for each char provided by user
 	double xArr[BUFSIZ]; // Holds each x value supplied by user
 	double yArr[BUFSIZ]; // Holds each y value supplied by user
 
 	/* Prompt user for data set for x values */
-	printf("%s", "What is the name of your independent variable? Type ? if you need directions or ! at any time to end the program \n" );
+	printf("%s", "What is the name of your independent variable? Type ? if you
+         need directions or ! at any time to end the program \n" );
 	str = fgets(xName, BUFSIZ, stdin);
 	if(*str == '!')
 	{
@@ -199,7 +244,16 @@ int main(int argc, char **argv)
 
 	if(*str == '?')
 	{
-		printf("%s", "Suppose you have two things that are related -- for example \nheight (independent variable) and shoe size (dependent variable). You \nthen collect data for a number of people, including their height and \nshoe size. Using this data, it is possible to then develop an equation \nthat will predict someone's shoe size based on their height. This \nprediction may or may not be completely accurate, depending on the true\nquantitative relationship between the two things, of course. Now to \nthe point of this program: using it, you can provide data for two \nrelated things and this the program will predict the value of one based\non the value of the other. So, let's try this again... \n");
+		printf("%s", "Suppose you have two things that are related -- for example
+    \nheight (independent variable) and shoe size (dependent variable). You
+    \nthen collect data for a number of people, including their height and
+    \nshoe size. Using this data, it is possible to then develop an equation
+    \nthat will predict someone's shoe size based on their height. This
+    \nprediction may or may not be completely accurate, depending on the
+    true\nquantitative relationship between the two things, of course. Now to
+    \nthe point of this program: using it, you can provide data for two
+    \nrelated things and this the program will predict the value of one
+    based\non the value of the other. So, let's try this again... \n");
 		printf("%s", "What is the name of your independent variable? \n" );
 
 		if(*fgets(xName, BUFSIZ, stdin) == '!'){
@@ -262,7 +316,7 @@ int main(int argc, char **argv)
 		return 0;
 	}
 
-	/* Prompt user for a value of x for which they would like to predict a y for */
+	/* Prompt user for a value of x for which a y value will be predicted */
 	printf(PREDICT, xName, yName);
 	printf("%c", '\n');
 
@@ -271,7 +325,9 @@ int main(int argc, char **argv)
 
 		x = atof(temp);
 
-		/* Call solveNormalEquation to generate the values of b0 and b1 in the linear equation of the form y = b0 + b1x */
+		/* Call solveNormalEquation to generate the values of b0 and b1 in the
+     * linear equation of the form y = b0 + b1x
+     */
 		solveNormalEquation(&v, xArr, yArr, (int) k);
 
 		/* Compute predicted value using linear equation */
